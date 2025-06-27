@@ -4,18 +4,18 @@ import api from '../api';
 function ViewBookings() {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
-  const handleCancel = (id) => {
-  api.patch(`bookings/${id}/`, { status: 'cancelled' })
-    .then(() => {
-      setBookings(prev =>
-        prev.map(b => (b.id === id ? { ...b, status: 'cancelled' } : b))
-      );
-    })
-    .catch(err => {
-      console.error('Error cancelling booking:', err);
-    });
-};
 
+  const handleCancel = (id) => {
+    api.patch(`bookings/${id}/`, { status: 'cancelled' })
+      .then(() => {
+        setBookings(prev =>
+          prev.map(b => (b.id === id ? { ...b, status: 'cancelled' } : b))
+        );
+      })
+      .catch(err => {
+        console.error('Error cancelling booking:', err);
+      });
+  };
 
   useEffect(() => {
     api.get('bookings/')
@@ -37,12 +37,16 @@ function ViewBookings() {
       <ul>
         {bookings.map(b => (
           <li key={b.id}>
-            Guest: {b.guest?.first_name} {b.guest?.last_name} <br />
-            Room: {b.room?.hotel?.name} - {b.room?.room_number} <br />
-            Check-in: {b.check_in} | Check-out: {b.check_out} <br />
-            Status: {b.status}
+            <div>
+              Guest: {b.guest?.first_name} {b.guest?.last_name} <br />
+              Room: {b.room?.hotel?.name} - {b.room?.room_number} <br />
+              Check-in: {b.check_in} | Check-out: {b.check_out} <br />
+              Status: {b.status}
+            </div>
             {b.status !== 'cancelled' && (
-              <button onClick={() => handleCancel(b.id)}>Cancel</button>
+              <button className="cancel-btn" onClick={() => handleCancel(b.id)}>
+                Cancel Booking
+              </button>
             )}
           </li>
         ))}

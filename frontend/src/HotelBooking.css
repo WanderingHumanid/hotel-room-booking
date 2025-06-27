@@ -1,0 +1,210 @@
+/* ================= Dark Theme Styling ================= */
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: #0d0f12;
+  color: #e0e0e0;
+  padding: 40px;
+}
+
+/* Header with Image and Title */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 50px;
+  background: rgba(255, 255, 255, 0.153);
+  border-radius: 25px;
+  padding: 25px;
+  transition: ease 0.3s;
+}
+
+header:hover {
+  background: rgb(0, 0, 0);
+  box-shadow: 0 0 20px rgba(0, 198, 255, 0.5);
+  transition: ease 0.3s;
+}
+
+header img {
+  width: 150px;
+  height: 150px;
+  border-radius: 15px;
+  margin-right: 20px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.377);
+  transition: ease 0.3s;
+}
+
+header img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px rgba(125, 188, 255, 0.7);
+  transition: ease 0.3s;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding: 10px;
+  transition: ease 0.3s;
+}
+
+header h1:hover {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transform: scale(1.1);
+  transition: ease 0.3s;
+}
+
+/* Section Titles */
+h2 {
+  margin-top: 40px;
+  font-size: 1.8rem;
+  padding: 20px;
+  margin: 10px;
+  background: linear-gradient(135deg, #4398ffb9, #00c6ff);
+  border-radius: 25px;
+  color: #ffffff;
+}
+
+/* Card Containers (Forms & Lists) */
+form, ul {
+  background: #24425887;
+  padding: 25px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  border: #34607f87 5px solid;
+}
+
+/* Inputs and Selects */
+select,
+input[type="date"],
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  margin-bottom: 18px;
+  border: none;
+  border-radius: 8px;
+  background: #26292d;
+  color: #e0e0e0;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+/* Buttons with Glow */
+button {
+  display: inline-block;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 13px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #0072ff, #00c6ff);
+  color: #fff;
+  box-shadow: 0 0 10px rgba(0, 198, 255, 0.8);
+  margin-top: 8px; /* consistent spacing */
+  max-width: 40%;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgb(255, 255, 255);
+  scale: 1.1;
+}
+
+/* Specific Cancel Button Override */
+.cancel-btn {
+  background: linear-gradient(135deg, #ff0066, #ff6666);
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.547);
+  margin-top: 30px;
+}
+
+.cancel-btn:hover {
+  box-shadow: 0 0 20px rgba(255, 0, 102, 1);
+}
+
+/* List Items Spacing */
+ul li {
+  list-style: none;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #333;
+}
+
+/* Feedback Messages */
+p {
+  margin-top: 15px;
+  color: #00e676;
+  font-weight: bold;
+  text-shadow: 0 0 8px rgba(0, 230, 118, 0.7);
+}
+
+/* Utility Classes for Layout */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.flex-row {
+  display: flex;
+  gap: 20px;
+  border: #0073ff86 5px solid;
+  border-radius: 25px;
+}
+
+.flex-col {
+  flex: 1;
+  padding: 25px;
+}
+
+/* Apply to App.js main wrapper */
+.App {
+  padding: 0 20px;
+}
+
+/* Layout helpers */
+.flex-row {
+  display: flex;
+  gap: 20px;
+}
+
+.flex-col {
+  flex: 1;
+}
+
+/* Section wrapper for collapsibles */
+section {
+  margin-bottom: 20px; /* space between blocks */
+}
+
+/* Toggle button */
+.toggle-btn {
+  display: block;
+  width: 100%;
+  text-align: center; /* center label */
+  padding: 12px;
+  margin: 20px 0 20px;
+  background: linear-gradient(135deg, #444, #222);
+  color: #fff;
+  border: none;
+  border-radius: 13px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.5);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.toggle-btn:hover {
+  background: linear-gradient(135deg, #555, #333);
+}
