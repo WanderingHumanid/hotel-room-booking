@@ -1,4 +1,7 @@
-![Hotel Logo](frontend/public/logo.png)
+<p>
+  <img src="frontend/public/logo.png" alt="Hotel Logo" width="200"/>
+</p>
+
 
 # Hotel Room Booking System
 
