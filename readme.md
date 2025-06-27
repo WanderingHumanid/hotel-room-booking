@@ -1,5 +1,5 @@
 <p>
-  <img src="frontend/public/logo.png" alt="Hotel Logo" width="200"/>
+  <img src="frontend/public/logo.png" alt="Hotel Logo" width="400"/>
 </p>
 
 
