@@ -1,6 +1,11 @@
+![Hotel Logo](frontend/public/logo.png)
+
 # Hotel Room Booking System
 
+# A10 ROOMZ
+
 A full-stack hotel booking application built with Django REST Framework (MySQL) and React.
+Made with the help of ChatGPT.
 
 ---
 
@@ -62,7 +67,7 @@ A full-stack hotel booking application built with Django REST Framework (MySQL) 
    ```
 
    - **Username:** `admin`
-   - **Email:** `admin@mai.com`
+   - **Email:** `admin@mail.com`
    - **Password:** `root@123`
 
 4. **Run Backend**
@@ -156,19 +161,17 @@ Hotel Room Booking/
 
 ---
 
-## 🤝 Contributing
+## 🤝 Afterwords
 
-1. Fork this repo
-2. Create a branch (`git checkout -b feature/my-feature`)
-3. Commit your changes (`git commit -m 'Add some feature'`)
-4. Push (`git push origin feature/my-feature`)
-5. Open a Pull Request
+This is me trying to learn full stack development, although I have used considerable amount of AI, I aim to decrease the dependance
+of any usage of AI whatsoever.
+# Special Thanks to my mentor, Ms. Anjusha V L for guiding me throughout.
 
 ---
 
 ## 📝 License
 
-[MIT](LICENSE) © Your Name
+This Project is not licensed, you may use it for whatsoever. 
 
 ---
 
