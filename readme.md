@@ -1,3 +1,5 @@
+![Hotel Logo](frontend/public/logo.png)
+
 # Hotel Room Booking System
 
 # A10 ROOMZ
