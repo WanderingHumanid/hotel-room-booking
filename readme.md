@@ -164,6 +164,36 @@ Hotel Room Booking/
 
 ---
 
+## 🖼️ Demo Screenshots
+
+Show off your app in action with the following images:
+
+<p align="center">
+  <img src="frontend/public/django-admin.png" alt="Django Admin Panel" width="600"/>
+  <br/>
+  <em>Django Admin: Manage Hotels, Rooms, Guests, Bookings</em>
+</p>
+
+<p align="center">
+  <img src="frontend/public/screenshot1.png" alt="Hotel & Room List" width="600"/>
+  <br/>
+  <em>Hotel List and Room List side-by-side</em>
+</p>
+
+<p align="center">
+  <img src="frontend/public/screenshot2.png" alt="Add Guest & Book Room Forms" width="600"/>
+  <br/>
+  <em>Collapsible Add Guest and Book Room forms</em>
+</p>
+
+<p align="center">
+  <img src="frontend/public/screenshot3.png" alt="All Bookings View" width="600"/>
+  <br/>
+  <em>All Bookings list with cancel buttons</em>
+</p>
+
+---
+
 ## 🤝 Afterwords
 
 This is me trying to learn full stack development, although I have used considerable amount of AI, I aim to decrease the dependance
