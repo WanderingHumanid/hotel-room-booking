@@ -166,8 +166,6 @@ Hotel Room Booking/
 
 ## 🖼️ Demo Screenshots
 
-Show off your app in action with the following images:
-
 <p align="center">
   <img src="frontend/public/django-admin.png" alt="Django Admin Panel" width="700"/>
   <br/>
