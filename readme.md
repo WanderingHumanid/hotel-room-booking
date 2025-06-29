@@ -198,7 +198,7 @@ Show off your app in action with the following images:
 
 This is me trying to learn full stack development, although I have used considerable amount of AI, I aim to decrease the dependance
 of any usage of AI whatsoever.
-# Special Thanks to my mentor, Ms. Anjusha V L for guiding me throughout.
+## Special Thanks to my mentor, Ms. Anjusha V L for guiding me throughout.
 
 ---
 
