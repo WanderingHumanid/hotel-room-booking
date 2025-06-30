@@ -6,6 +6,15 @@ export default function RoomSelect({ hotelId, guestId, onBook, onCancel }) {
   const [selectedRoom, setSelectedRoom] = useState('');
   const [status, setStatus] = useState('');
   const [loading, setLoading] = useState(true);
+  const [checkIn, setCheckIn] = useState(() => {
+    const today = new Date();
+    return today.toISOString().slice(0, 10);
+  });
+  const [checkOut, setCheckOut] = useState(() => {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    return tomorrow.toISOString().slice(0, 10);
+  });
 
   useEffect(() => {
     api.get(`rooms/?hotel=${hotelId}`)
@@ -23,12 +32,15 @@ export default function RoomSelect({ hotelId, guestId, onBook, onCancel }) {
       setStatus('Please select a room.');
       return;
     }
+    if (!checkIn || !checkOut) {
+      setStatus('Please select check-in and check-out dates.');
+      return;
+    }
+    if (checkOut <= checkIn) {
+      setStatus('Check-out must be after check-in.');
+      return;
+    }
     try {
-      const today = new Date();
-      const tomorrow = new Date(today);
-      tomorrow.setDate(today.getDate() + 1);
-      const checkIn = today.toISOString().slice(0, 10);
-      const checkOut = tomorrow.toISOString().slice(0, 10);
       await api.post('bookings/', {
         guest_id: guestId,
         room_id: selectedRoom,
@@ -63,7 +75,31 @@ export default function RoomSelect({ hotelId, guestId, onBook, onCancel }) {
           </option>
         ))}
       </select>
-      <button type="submit" style={{marginTop: 8}}>Book Room</button>
+      <div style={{display: 'flex', gap: 12, margin: '16px 0 0 0', width: '100%'}}>
+        <div style={{flex: 1}}>
+          <label style={{fontWeight: 600, color: '#0073e6', fontSize: '1.01rem'}}>Check-in</label>
+          <input
+            type="date"
+            value={checkIn}
+            min={new Date().toISOString().slice(0, 10)}
+            onChange={e => setCheckIn(e.target.value)}
+            required
+            style={{width: '100%', padding: '12px', borderRadius: 8, border: '1.5px solid #e0e7ff', fontSize: '1.08rem', marginTop: 4}}
+          />
+        </div>
+        <div style={{flex: 1}}>
+          <label style={{fontWeight: 600, color: '#0073e6', fontSize: '1.01rem'}}>Check-out</label>
+          <input
+            type="date"
+            value={checkOut}
+            min={checkIn}
+            onChange={e => setCheckOut(e.target.value)}
+            required
+            style={{width: '100%', padding: '12px', borderRadius: 8, border: '1.5px solid #e0e7ff', fontSize: '1.08rem', marginTop: 4}}
+          />
+        </div>
+      </div>
+      <button type="submit" style={{marginTop: 18}}>Book Room</button>
       {status && status !== 'success' && <p style={{color: '#d32f2f', margin: 0}}>{status}</p>}
     </form>
   );

@@ -1,27 +1,215 @@
+/* ===== Dark Mode Support ===== */
+body.dark-mode {
+  background: linear-gradient(120deg, #15181f 0%, #232b3a 100%);
+  color: #e0e7ff;
+  transition: background 0.4s;
+}
+.dark-mode .aboutus-container,
+.dark-mode .modal-content,
+.dark-mode form,
+.dark-mode .card,
+.dark-mode .modal-user-form {
+  background: rgba(30,34,44,0.98) !important;
+  color: #e0e7ff !important;
+  box-shadow: 0 8px 40px rgba(0, 115, 230, 0.22), 0 2px 16px rgba(0,0,0,0.32);
+  border: 1.5px solid #263043;
+  backdrop-filter: blur(2px);
+}
+.dark-mode .aboutus-content p,
+.dark-mode .aboutus-content ul,
+.dark-mode .aboutus-content li {
+  color: #b6c2d1 !important;
+}
+.dark-mode .aboutus-content h2,
+.dark-mode h2,
+.dark-mode .aboutus-hero h1 {
+  color: #fff !important;
+  background: linear-gradient(90deg, #4fd1ff 40%, #00e6a6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  text-shadow: 0 2px 16px #0e223a66;
+  border-left: 5px solid #00e6a6;
+  padding-left: 16px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+.dark-mode .aboutus-content a {
+  color: #4fd1ff !important;
+  text-decoration: underline;
+}
+.dark-mode .aboutus-content a:hover {
+  color: #00e6a6 !important;
+}
+.dark-mode header {
+  background: rgba(30,34,44,0.98) !important;
+  box-shadow: 0 8px 40px rgba(0, 115, 230, 0.22), 0 2px 16px rgba(0,0,0,0.32);
+  border-bottom: 1.5px solid #263043;
+  transition: background 0.4s;
+}
+.dark-mode header h1,
+.dark-mode .aboutus-hero h1 {
+  background: linear-gradient(90deg, #4fd1ff 40%, #00e6a6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 2px 12px #0e223a44;
+}
+.dark-mode .card h3 {
+  color: #4fd1ff !important;
+  text-shadow: 0 2px 8px #0e223a33;
+}
+.dark-mode .card p {
+  color: #b6c2d1 !important;
+}
+/* --- Polished Dark Mode Buttons & Forms --- */
+.dark-mode .card button,
+.dark-mode .modal-book-btn,
+.dark-mode .modal-user-form button,
+.dark-mode .cancel-btn {
+  background: linear-gradient(90deg, #232b3a 60%, #4fd1ff 100%) !important;
+  color: #fff !important;
+  border: 1.5px solid #263043 !important;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px #0e223a55, 0 1px 4px #00e6a622;
+  font-weight: 700;
+  font-size: 1.08rem;
+  letter-spacing: 0.01em;
+  transition: background 0.22s, color 0.22s, box-shadow 0.22s, border 0.18s, transform 0.1s;
+  outline: none;
+}
+.dark-mode .card button:hover,
+.dark-mode .modal-book-btn:hover,
+.dark-mode .modal-user-form button:hover {
+  background: linear-gradient(90deg, #00e6a6 60%, #4fd1ff 100%) !important;
+  color: #232b3a !important;
+  border-color: #00e6a6 !important;
+  box-shadow: 0 4px 18px #00e6a677, 0 2px 8px #4fd1ff33;
+  transform: translateY(-2px) scale(1.03);
+}
+.dark-mode .cancel-btn {
+  background: linear-gradient(90deg, #ff4d4f 60%, #ffb199 100%) !important;
+  color: #fff !important;
+  border: 1.5px solid #ff4d4f !important;
+  box-shadow: 0 2px 12px #ff4d4f33, 0 1px 4px #ffb19922;
+}
+.dark-mode .cancel-btn:hover:not(:disabled) {
+  background: linear-gradient(90deg, #d32f2f 60%, #ffb199 100%) !important;
+  color: #fff !important;
+  border-color: #d32f2f !important;
+  box-shadow: 0 4px 18px #d32f2f77, 0 2px 8px #ffb19933;
+  transform: translateY(-2px) scale(1.03);
+}
+.dark-mode .cancel-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+.dark-mode form,
+.dark-mode .modal-user-form {
+  background: rgba(30,34,44,0.98) !important;
+  color: #e0e7ff !important;
+  border: 1.5px solid #263043 !important;
+  box-shadow: 0 8px 40px rgba(0, 115, 230, 0.22), 0 2px 16px rgba(0,0,0,0.32);
+  backdrop-filter: blur(2px);
+}
+.dark-mode form .form-row input,
+.dark-mode form .form-row select,
+.dark-mode .modal-user-form input {
+  background: #181c24 !important;
+  color: #e0e7ff !important;
+  border: 1.5px solid #263043 !important;
+  box-shadow: 0 1px 4px #0e223a33;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+.dark-mode form .form-row input:focus,
+.dark-mode form .form-row select:focus,
+.dark-mode .modal-user-form input:focus {
+  border: 1.5px solid #4fd1ff !important;
+  box-shadow: 0 0 0 2px #4fd1ff44 !important;
+  outline: none;
+}
+.dark-mode .success-popup {
+  background: linear-gradient(90deg, #00e6a6 60%, #4fd1ff 100%) !important;
+  color: #232b3a !important;
+  box-shadow: 0 4px 32px #00e6a644;
+}
+.dark-mode .modal-close {
+  color: #b0bec5 !important;
+}
+.dark-mode .modal-close:hover {
+  color: #ff4d4f !important;
+}
+.dark-mode .hero-search {
+  background: rgba(30,34,44,0.98) !important;
+  box-shadow: 0 2px 24px #0e223a33, 0 1.5px 8px #0e223a22;
+  border: 1.5px solid #263043;
+}
+.dark-mode .hero-search input,
+.dark-mode .hero-search select {
+  background: #181c24 !important;
+  color: #e0e7ff !important;
+  border: 1.5px solid #263043 !important;
+  box-shadow: 0 1px 4px #0e223a33;
+}
+.dark-mode .hero-search input:focus,
+.dark-mode .hero-search select:focus {
+  border: 1.5px solid #4fd1ff !important;
+  box-shadow: 0 0 0 2px #4fd1ff44 !important;
+}
+.dark-mode .container {
+  background: none !important;
+}
+.dark-mode .toggle-btn,
+.dark-mode header button,
+.dark-mode header .aboutus-btn {
+  background: #181c24 !important;
+  color: #4fd1ff !important;
+  border: 1.2px solid #263043 !important;
+  box-shadow: 0 1px 4px #0e223a33;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.dark-mode header button:hover,
+.dark-mode .toggle-btn:hover,
+.dark-mode header .aboutus-btn:hover {
+  background: #232b3a !important;
+  color: #00e6a6 !important;
+  border-color: #4fd1ff !important;
+  box-shadow: 0 2px 8px #00e6a644;
+}
 /* ===== About Us Page Styles (Polished) ===== */
 .aboutus-container {
-  max-width: 900px;
-  margin: 0 auto 60px auto;
-  background: #fff;
-  border-radius: 20px;
-  box-shadow: 0 6px 36px rgba(0,115,230,0.13), 0 2px 10px rgba(0,0,0,0.08);
-  padding: 54px 38px 40px 38px;
+  max-width: 980px;
+  margin: 0 auto 64px auto;
+  background: linear-gradient(120deg, #f8fbff 0%, #e0e7ff 100%);
+  border-radius: 28px;
+  box-shadow: 0 10px 48px rgba(0,115,230,0.13), 0 2px 16px rgba(0,0,0,0.10);
+  padding: 64px 48px 48px 48px;
   font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
   color: #1a237e;
-  transition: box-shadow 0.2s;
+  transition: box-shadow 0.2s, background 0.3s;
+  border: 1.5px solid #e0e7ff;
 }
 .aboutus-hero {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 36px;
+  margin-bottom: 44px;
+  padding-top: 18px;
+  padding-bottom: 8px;
 }
 .aboutus-logo {
-  width: 120px;
-  height: 120px;
-  border-radius: 20px;
-  box-shadow: 0 3px 18px rgba(0,115,230,0.13);
-  margin-bottom: 20px;
+  padding: 36px;
+  height: 170px;
+  border-radius: 28px;
+  box-shadow: 0 10px 40px rgba(0,115,230,0.13), 0 2px 16px rgba(0,0,0,0.10);
+  margin-bottom: 36px;
+  object-fit: cover;
+  background: #fff;
+  display: block;
 }
 .aboutus-hero h1 {
   font-size: 2.5rem;
@@ -46,47 +234,71 @@
 }
 .aboutus-content {
   margin-top: 22px;
+  font-size: 1.13rem;
+  line-height: 1.85;
+  color: #233;
 }
 .aboutus-content h2 {
   color: #0073e6;
-  font-size: 1.35rem;
+  font-size: 1.45rem;
   font-weight: 800;
-  margin-top: 38px;
-  margin-bottom: 12px;
+  margin-top: 44px;
+  margin-bottom: 16px;
   letter-spacing: 0.01em;
+  background: linear-gradient(90deg, #e0e7ff 60%, #b3e0ff 100%);
+  border-left: 5px solid #00c6fb;
+  padding-left: 16px;
+  border-radius: 0 12px 12px 0;
+  box-shadow: 0 1px 8px rgba(0,115,230,0.04);
 }
 .aboutus-content p, .aboutus-content ul {
-  font-size: 1.11rem;
-  color: #333;
-  margin-bottom: 18px;
-  line-height: 1.75;
+  font-size: 1.13rem;
+  color: #233;
+  margin-bottom: 20px;
+  line-height: 1.85;
 }
 .aboutus-content ul {
-  padding-left: 28px;
-  margin-bottom: 20px;
+  padding-left: 32px;
+  margin-bottom: 22px;
 }
 .aboutus-content li {
-  margin-bottom: 9px;
-  font-size: 1.11rem;
+  margin-bottom: 11px;
+  font-size: 1.13rem;
+  position: relative;
+  padding-left: 8px;
+}
+.aboutus-content li::before {
+  content: '•';
+  color: #00c6fb;
+  font-size: 1.2em;
+  position: absolute;
+  left: -14px;
+  top: 0.1em;
 }
 .aboutus-content a {
   color: #0073e6;
   text-decoration: underline;
-  transition: color 0.2s;
+  font-weight: 600;
+  transition: color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 0 #b3e0ff;
+  border-radius: 3px;
 }
 .aboutus-content a:hover {
   color: #005bb5;
+  background: #e0e7ff;
+  box-shadow: 0 2px 8px #b3e0ff44;
 }
 @media (max-width: 700px) {
   .aboutus-container {
-    padding: 16px 3vw 18px 3vw;
+    padding: 12px 2vw 14px 2vw;
   }
   .aboutus-hero h1 {
-    font-size: 1.45rem;
+    font-size: 1.25rem;
   }
   .aboutus-logo {
-    width: 70px;
-    height: 70px;
+    max-width: 120px;
+    border-radius: 16px;
+    margin-bottom: 18px;
   }
 }
 /* Modal User Form (vertical, for booking popup) */
@@ -274,7 +486,8 @@ body {
 /* ===== Header / Hero Search ===== */
 /* ===== Header (Polished) ===== */
 header {
-  padding: 18px 38px;
+  margin-top: 30px;
+  padding: 18px 18px;
   background: rgba(255,255,255,0.98);
   border-radius: 20px;
   box-shadow: 0 6px 36px rgba(0, 115, 230, 0.13), 0 2px 10px rgba(0,0,0,0.08);
@@ -289,7 +502,7 @@ header {
   transition: box-shadow 0.2s;
 }
 header img {
-  height: 76px;
+  height: 80px;
   border-radius: 14px;
   box-shadow: 0 2px 14px rgba(0,115,230,0.10);
   margin-right: 18px;
@@ -314,39 +527,53 @@ header nav {
   margin-left: auto;
 }
 /* Header nav buttons */
-header button, header .toggle-btn {
-  background: none;
-  border: none;
-  color: #0073e6;
-  font-size: 1.01rem;
-  font-weight: 600;
-  padding: 4px 10px;
-  border-radius: 7px;
-  cursor: pointer;
-  width: 200px;
-  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
-  box-shadow: none;
-  outline: none;
-}
-header button.aboutus-btn, header .aboutus-btn {
-  font-size: 0.98rem;
-  font-weight: 600;
-  padding: 3px 7px;
-  border-radius: 6px;
-  background: #f5faff;
-  color: #0073e6;
-  border: 1.2px solid #e0e7ff;
-  box-shadow: 0 1px 4px rgba(0,115,230,0.06);
+/* ===== Uniform Header Buttons (Light & Dark) ===== */
+header button, header .toggle-btn, header button.aboutus-btn, header .aboutus-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 140px;
+  max-width: 220px;
+  width: 180px;
+  height: 44px;
+  padding: 0 18px;
   margin-left: 8px;
+  background: linear-gradient(90deg, #f8fbff 60%, #e0e7ff 100%);
+  border: 1.5px solid #e0e7ff;
+  border-radius: 9px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: #0073e6;
+  box-shadow: 0 1px 6px rgba(0,115,230,0.08);
+  letter-spacing: 0.01em;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s, border 0.18s, transform 0.1s;
+  outline: none;
+  gap: 8px;
 }
-header button.aboutus-btn:hover, header .aboutus-btn:hover {
-  background: #e0e7ff;
+header button:first-child, header .toggle-btn:first-child, header button.aboutus-btn:first-child, header .aboutus-btn:first-child {
+  margin-left: 0;
+}
+header button:hover, header .toggle-btn:hover, header button.aboutus-btn:hover, header .aboutus-btn:hover, header button:focus, header .toggle-btn:focus, header button.aboutus-btn:focus, header .aboutus-btn:focus {
+  background: linear-gradient(90deg, #e0e7ff 60%, #b3e0ff 100%);
   color: #005bb5;
   border-color: #b3e0ff;
+  box-shadow: 0 2px 10px #0073e622;
+  transform: translateY(-1.5px) scale(1.025);
 }
-header button:hover, header .toggle-btn:hover {
-  background: #e0e7ff;
-  color: #005bb5;
+.dark-mode header button, .dark-mode header .toggle-btn, .dark-mode header button.aboutus-btn, .dark-mode header .aboutus-btn {
+  background: linear-gradient(90deg, #181c24 60%, #232b3a 100%) !important;
+  color: #4fd1ff !important;
+  border: 1.5px solid #263043 !important;
+  box-shadow: 0 1px 6px #0e223a33;
+}
+.dark-mode header button:hover, .dark-mode header .toggle-btn:hover, .dark-mode header button.aboutus-btn:hover, .dark-mode header .aboutus-btn:hover, .dark-mode header button:focus, .dark-mode header .toggle-btn:focus, .dark-mode header button.aboutus-btn:focus, .dark-mode header .aboutus-btn:focus {
+  background: linear-gradient(90deg, #232b3a 60%, #181c24 100%) !important;
+  color: #00e6a6 !important;
+  border-color: #4fd1ff !important;
+  box-shadow: 0 2px 10px #00e6a644;
+  transform: translateY(-1.5px) scale(1.025);
 }
 
 /* Hero search form */
@@ -461,14 +688,14 @@ h2 {
 
 /* Card Image Placeholder */
   
-.card img, .hotel-img, .room-img {
-  width: 100%;
-  max-width: 340px;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 16px;
-  box-shadow: 0 2px 12px rgba(0,115,230,0.10);
+  .card img, .hotel-img, .room-img {
+    width: 100%;
+    max-width: 380px;
+    height: 230px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin-bottom: 22px;
+    box-shadow: 0 6px 22px rgba(0,115,230,0.16);
 }
 
 /* Card Title */
@@ -572,19 +799,52 @@ form button:hover {
 
 /* ===== Collapsible Toggles ===== */
   
+/* ===== Uniform Toggle Button (Light & Dark) ===== */
 .toggle-btn {
-  display: block;
-  width: 100%;
-  padding: 14px 0;
-  margin: 24px 0;
-  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 140px;
+  max-width: 220px;
+  width: 180px;
+  height: 44px;
+  padding: 0 18px;
+  margin: 18px 0;
+  background: linear-gradient(90deg, #f8fbff 60%, #e0e7ff 100%);
   border: 1.5px solid #e0e7ff;
-  border-radius: 8px;
+  border-radius: 9px;
   text-align: center;
   cursor: pointer;
   font-size: 1.08rem;
-  font-weight: 600;
-  transition: background 0.2s, box-shadow 0.2s, border 0.2s;
+  font-weight: 700;
+  color: #0073e6;
+  box-shadow: 0 1px 6px rgba(0,115,230,0.08);
+  letter-spacing: 0.01em;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s, border 0.18s, transform 0.1s;
+  outline: none;
+  gap: 8px;
+}
+.toggle-btn:hover, .toggle-btn:focus {
+  background: linear-gradient(90deg, #e0e7ff 60%, #b3e0ff 100%);
+  color: #005bb5;
+  border-color: #b3e0ff;
+  box-shadow: 0 2px 10px #0073e622;
+  transform: translateY(-1.5px) scale(1.025);
+}
+
+/* Uniform dark mode toggle button */
+.dark-mode .toggle-btn {
+  background: linear-gradient(90deg, #181c24 60%, #232b3a 100%) !important;
+  color: #4fd1ff !important;
+  border: 1.5px solid #263043 !important;
+  box-shadow: 0 1px 6px #0e223a33;
+}
+.dark-mode .toggle-btn:hover, .dark-mode .toggle-btn:focus {
+  background: linear-gradient(90deg, #232b3a 60%, #181c24 100%) !important;
+  color: #00e6a6 !important;
+  border-color: #4fd1ff !important;
+  box-shadow: 0 2px 10px #00e6a644;
+  transform: translateY(-1.5px) scale(1.025);
 }
 
   
@@ -656,7 +916,7 @@ form button:hover {
     padding: 14px 8px 12px 8px;
   }
   .card img, .hotel-img, .room-img {
-    height: 120px;
+    height: 160px;
     max-width: 100vw;
   }
   h2 {

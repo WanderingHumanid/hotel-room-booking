@@ -103,6 +103,16 @@ function ViewBookings({ lookupMode }) {
                 {b.status === 'cancelled' && (
                   <div style={{position: 'absolute', top: 12, right: 18, color: '#d32f2f', fontWeight: 700, fontSize: '1.05rem'}}>Cancelled</div>
                 )}
+                {b.status !== 'cancelled' && (
+                  <button
+                    className="cancel-btn"
+                    style={{marginTop: 8, width: '100%', fontWeight: 700, fontSize: '1.08rem', borderRadius: 8, padding: '12px 0'}}
+                    disabled={cancelling === b.id}
+                    onClick={() => handleCancel(b.id)}
+                  >
+                    {cancelling === b.id ? 'Cancelling...' : 'Cancel Booking'}
+                  </button>
+                )}
               </div>
             ))}
           </div>

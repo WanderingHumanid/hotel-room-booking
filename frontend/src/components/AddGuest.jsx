@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ExistingUserLookup from './ExistingUserLookup';
 import api from '../api';
 
 
@@ -11,6 +12,8 @@ function AddGuest({ hotelId, modalMode, onBookingSuccess, onUserAdded, setError 
   });
   const [status, setStatus] = useState('');
   const [booking, setBooking] = useState(null);
+  const [showLookup, setShowLookup] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
 
   const handleChange = (e) => {
     setFormData(prev => ({
@@ -45,81 +48,123 @@ function AddGuest({ hotelId, modalMode, onBookingSuccess, onUserAdded, setError 
     }
   };
 
+  // Handler for booking for existing user
+  const handleExistingUser = async (user) => {
+    setSelectedUser(user);
+    setShowLookup(false);
+    setStatus('');
+    setBooking(null);
+    // Call onUserAdded with the selected user's id
+    if (onUserAdded) onUserAdded(user.id);
+  };
+
   return (
     <div>
       <h2>{'Add User Details'}</h2>
-      <form
-        onSubmit={handleSubmit}
-        className={modalMode ? 'modal-user-form' : 'hero-search add-user-form'}
-        style={modalMode ? {
-          maxWidth: 420,
-          margin: '0 auto',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 16,
-          background: 'rgba(255,255,255,0.98)',
-          border: '1.5px solid #e0e7ff',
-          boxShadow: '0 2px 24px rgba(0,115,230,0.10)',
-          borderRadius: 12,
-          padding: 0,
-        } : {
-          maxWidth: 900,
-          margin: '0 auto 32px auto',
-          flexWrap: 'nowrap',
-          gap: 28,
-          justifyContent: 'center',
-          alignItems: 'flex-end',
-          background: 'rgba(255,255,255,0.98)',
-          border: '1.5px solid #e0e7ff',
-          boxShadow: '0 2px 24px rgba(0,115,230,0.10)',
+      <button
+        type="button"
+        className="modal-book-btn"
+        style={{
+          marginBottom: 28,
+          width: '100%',
+          fontWeight: 800,
+          fontSize: '1.13rem',
+          borderRadius: 10,
+          padding: '18px 0',
+          letterSpacing: '0.01em',
+          boxShadow: '0 2px 10px #0073e622',
+          transition: 'background 0.18s, color 0.18s, box-shadow 0.18s, border 0.18s, transform 0.1s',
         }}
+        onClick={() => setShowLookup(true)}
       >
-        <input
-          type="text"
-          name="first_name"
-          placeholder="First Name"
-          value={formData.first_name}
-          onChange={handleChange}
-          required
+        Book for existing user
+      </button>
+      {showLookup && (
+        <ExistingUserLookup
+          onUserFound={handleExistingUser}
+          onClose={() => setShowLookup(false)}
         />
-        <input
-          type="text"
-          name="last_name"
-          placeholder="Last Name"
-          value={formData.last_name}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="text"
-          name="phone"
-          placeholder="Phone"
-          value={formData.phone}
-          onChange={handleChange}
-          required
-        />
-        <button
-          type="submit"
-          style={{
-            minWidth: 180,
-            marginTop: 0,
-            fontSize: '1.13rem',
-            padding: '18px 0',
-            borderRadius: 10,
-            fontWeight: 700,
+      )}
+      {!selectedUser && (
+        <form
+          onSubmit={handleSubmit}
+          className={modalMode ? 'modal-user-form' : 'hero-search add-user-form'}
+          style={modalMode ? {
+            maxWidth: 420,
+            margin: '0 auto',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 16,
+            background: 'rgba(255,255,255,0.98)',
+            border: '1.5px solid #e0e7ff',
+            boxShadow: '0 2px 24px rgba(0,115,230,0.10)',
+            borderRadius: 12,
+            padding: 0,
+          } : {
+            maxWidth: 900,
+            margin: '0 auto 32px auto',
+            flexWrap: 'nowrap',
+            gap: 28,
+            justifyContent: 'center',
+            alignItems: 'flex-end',
+            background: 'rgba(255,255,255,0.98)',
+            border: '1.5px solid #e0e7ff',
+            boxShadow: '0 2px 24px rgba(0,115,230,0.10)',
           }}
         >
-          Confirm User
-        </button>
-      </form>
+          <input
+            type="text"
+            name="first_name"
+            placeholder="First Name"
+            value={formData.first_name}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="text"
+            name="last_name"
+            placeholder="Last Name"
+            value={formData.last_name}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="text"
+            name="phone"
+            placeholder="Phone"
+            value={formData.phone}
+            onChange={handleChange}
+            required
+          />
+          <button
+            type="submit"
+            style={{
+              minWidth: 180,
+              marginTop: 0,
+              fontSize: '1.13rem',
+              padding: '18px 0',
+              borderRadius: 10,
+              fontWeight: 700,
+            }}
+          >
+            Confirm User
+          </button>
+        </form>
+      )}
+      {selectedUser && (
+        <div style={{textAlign: 'center', marginTop: 16, color: '#009e60', fontWeight: 600}}>
+          Existing user selected: {selectedUser.first_name} {selectedUser.last_name} ({selectedUser.phone})<br />
+          Proceeding to booking...
+        </div>
+      )}
       {status && (
         <p style={{textAlign: 'center', marginTop: 12, color: status.includes('success') ? '#0073e6' : '#d32f2f', fontWeight: 600, fontSize: '1.08rem'}}>{status}</p>
       )}
