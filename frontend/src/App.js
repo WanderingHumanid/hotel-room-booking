@@ -28,9 +28,8 @@ function App() {
     <div className="App container">
       {/* ================= Header / Hero ================= */}
       <header>
-        <img src={process.env.PUBLIC_URL + '/logo.png'} alt="Hotel Logo" />
         <GradientText
-          colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
+          colors={["#d1eadfff", "#4079ff", "#c6e5eaff", "#4079ff", "#98dbd5ff"]}
           animationSpeed={3}
           showBorder={false}
           className="custom-class"
@@ -45,7 +44,7 @@ function App() {
               lineHeight: 1.1
             }}
           >
-            a10 ROOMZ
+            Hotel Booking
           </span>
         </GradientText>
         <nav>
@@ -62,14 +61,6 @@ function App() {
             onClick={() => setShowBookingLookup(b => !b)}
           >
             {showBookingLookup ? 'Hide My Bookings' : 'Show Your Booking'}
-          </button>
-          <button
-            className="toggle-btn"
-            style={{minWidth: 44, fontSize: '1.1rem', padding: '8px 10px', borderRadius: 8, fontWeight: 700, background: darkMode ? '#232b3a' : '#fff', color: darkMode ? '#40cfff' : '#0073e6', border: '1.2px solid #e0e7ff', marginLeft: 8}}
-            title={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-            onClick={() => setDarkMode(d => !d)}
-          >
-            {darkMode ? '🌙' : '☀️'}
           </button>
         </nav>
       </header>
