@@ -1,14 +1,6 @@
-<p>
-  <img src="frontend/public/logo.png" alt="Hotel Logo" width="400"/>
-</p>
-
-
 # Hotel Room Booking System
 
-# A10 ROOMZ
-
 A full-stack hotel booking application built with Django REST Framework (MySQL) and React.
-Made with the help of ChatGPT.
 
 ---
 
@@ -21,12 +13,12 @@ Made with the help of ChatGPT.
 
 ---
 
-## 🚀 Quick Start
+## 🚀 How to Run the Project:
 
 1. **Clone the Repo**
 
    ```bash
-   git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
+   git clone https://github.com/WanderingHumanid/hotel-room-booking.git
    cd YOUR_REPO
    ```
 
@@ -142,69 +134,4 @@ Made with the help of ChatGPT.
 
 ---
 
-## 📂 Project Structure
-
-```
-Hotel Room Booking/
-├── backend/
-│   ├── hotelapi/            # Django project
-│   ├── bookingapp/          # Models, APIs, serializers, views
-│   ├── venv/                # Python virtualenv
-│   ├── requirements.txt
-│   └── manage.py
-└── frontend/
-    ├── public/
-    ├── src/
-    │   ├── components/      # React components
-    │   ├── api.js           # Axios instance
-    │   ├── HotelBooking.css # Dark-theme styling
-    │   └── App.js
-    └── package.json
-```
-
----
-
-## 🖼️ Demo Screenshots
-
-<p align="center">
-  <img src="frontend/public/django-admin.png" alt="Django Admin Panel" width="700"/>
-  <br/>
-  <em>Django Admin: Manage Hotels, Rooms, Guests, Bookings</em>
-</p>
-
-<p align="center">
-  <img src="frontend/public/screenshot1.png" alt="Hotel & Room List" width="700"/>
-  <br/>
-  <em>Hotel List and Room List side-by-side</em>
-</p>
-
-<p align="center">
-  <img src="frontend/public/screenshot2.png" alt="Add Guest & Book Room Forms" width="700"/>
-  <br/>
-  <em>Collapsible Add Guest and Book Room forms</em>
-</p>
-
-<p align="center">
-  <img src="frontend/public/screenshot3.png" alt="All Bookings View" width="700"/>
-  <br/>
-  <em>All Bookings list with cancel buttons</em>
-</p>
-
----
-
-## 🤝 Afterwords
-
-This is me trying to learn full stack development, although I have used considerable amount of AI, I aim to decrease the dependance
-of any usage of AI whatsoever.
-## Special Thanks to my mentor, Ms. Anjusha V L for guiding me throughout.
-
----
-
-## 📝 License
-
-This Project is not licensed, you may use it for whatsoever. 
-
----
-
-# Happy coding! 🚀
-
+### This project was made for the SEP Program for Christ College of Engineering, Irinjalakuda.
