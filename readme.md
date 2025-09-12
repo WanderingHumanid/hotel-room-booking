@@ -1,137 +1,164 @@
-# Hotel Room Booking System
+# 🏨 Hotel Room Booking System
 
-A full-stack hotel booking application built with Django REST Framework (MySQL) and React.
+A full-stack web application for hotel room booking with a modern React frontend and Django REST API backend. The system allows users to search for hotels, view available rooms, make bookings, and manage their reservations.
 
----
+## ✨ Features
+
+- **Hotel Search & Browse**: Search and filter hotels by location, price, and availability
+- **Room Management**: View detailed room information with images and pricing
+- **User Authentication**: Secure guest registration and login system
+- **Booking System**: Make, view, and manage hotel room reservations
+- **Admin Interface**: Django admin panel for hotel and booking management
+- **Responsive Design**: Mobile-friendly interface built with React
+- **Image Gallery**: Hotel and room image galleries for better user experience
 
 ## 🛠️ Tech Stack
 
-- **Backend:** Django, Django REST Framework, MySQL
-- **Frontend:** React (Create React App), Axios
-- **Styling:** Custom CSS with dark-theme gradients and glows
-- **Versioning:** Git & GitHub
+### Backend
+- **Django 5.2.3** - Python web framework
+- **Django REST Framework 3.15.2** - API development
+- **MySQL** - Database (via mysqlclient 2.2.6)
+- **Pillow 11.0.0** - Image processing
+- **django-cors-headers 4.6.0** - Cross-origin resource sharing
 
----
+### Frontend
+- **React 19.1.0** - JavaScript library for user interfaces
+- **Axios 1.10.0** - HTTP client for API requests
+- **React Scripts 5.0.1** - Development tools and build system
+- **CSS3** - Styling and responsive design
 
-## 🚀 How to Run the Project:
+## 📋 Prerequisites
 
-1. **Clone the Repo**
+Before you begin, ensure you have the following installed:
+- **Python 3.8+**
+- **Node.js 14+** and npm
+- **MySQL 5.7+** or **MySQL 8.0+**
+- **Git**
 
-   ```bash
-   git clone https://github.com/WanderingHumanid/hotel-room-booking.git
-   cd YOUR_REPO
-   ```
+## 🚀 Installation
 
-2. **Backend Setup**
+### 1. Clone the Repository
+```bash
+git clone https://github.com/WanderingHumanid/hotel-room-booking.git
+cd hotel-room-booking
+```
 
-   ```bash
-   cd backend
-   python -m venv venv
-   venv\Scripts\activate         # Windows
-   # source venv/bin/activate    # macOS/Linux
-   pip install -r requirements.txt
-   ```
+### 2. Backend Setup
 
-   **Configure MySQL**
+#### Navigate to Backend Directory
+```bash
+cd backend
+```
 
-   - Create database:
-     ```sql
-     CREATE DATABASE hotel_booking_db;
-     ```
-   - (Optional) Create dedicated user, or use `root` in `settings.py`.
-   - In `hotelapi/settings.py`, set:
-     ```py
-     DATABASES = {
-       'default': {
-         'ENGINE': 'django.db.backends.mysql',
-         'NAME': 'hotel_booking_db',
-         'USER': 'root',
-         'PASSWORD': 'root',
-         'HOST': 'localhost',
-         'PORT': '3306',
-       }
-     }
-     ```
+#### Create Virtual Environment
+```bash
+# Windows
+python -m venv venv
+venv\Scripts\activate
 
-3. **Migrate & Create Superuser**
+# macOS/Linux
+python3 -m venv venv
+source venv/bin/activate
+```
 
-   ```bash
-   python manage.py makemigrations
-   python manage.py migrate
-   python manage.py createsuperuser
-   ```
+#### Install Python Dependencies
+```bash
+pip install -r requirements.txt
+```
 
-   - **Username:** `admin`
-   - **Email:** `admin@mail.com`
-   - **Password:** `root@123`
+#### Database Configuration
+1. Create a MySQL database for the project
+2. Update the database configuration in `hotelapi/settings.py`:
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'your_database_name',
+        'USER': 'your_mysql_username',
+        'PASSWORD': 'your_mysql_password',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}
+```
 
-4. **Run Backend**
+#### Run Database Migrations
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
 
-   ```bash
-   python manage.py runserver
-   ```
+#### Create Superuser (Optional)
+```bash
+python manage.py createsuperuser
+```
 
-   - API root: `http://127.0.0.1:8000/`
-   - API endpoints under: `http://127.0.0.1:8000/api/`
+#### Start Backend Server
+```bash
+python manage.py runserver
+```
+The backend API will be available at `http://localhost:8000`
 
-5. **Frontend Setup** (new terminal)
+### 3. Frontend Setup
 
-   ```bash
-   cd ../frontend
-   npm install
-   npm start
-   ```
+#### Navigate to Frontend Directory
+```bash
+cd frontend
+```
 
-   - App: `http://localhost:3000`
+#### Install Node.js Dependencies
+```bash
+npm install
+```
 
----
+#### Start Frontend Development Server
+```bash
+npm start
+```
+The frontend application will be available at `http://localhost:3000`
 
-## ⚙️ API Endpoints
 
-| Method | Endpoint              | Description                                      |
-| ------ | --------------------- | ------------------------------------------------ |
-| GET    | `/api/hotels/`        | List/Create hotels                               |
-| GET    | `/api/hotels/{id}/`   | Retrieve/Update/Delete a specific hotel          |
-| GET    | `/api/rooms/`         | List/Create rooms                                |
-| GET    | `/api/rooms/{id}/`    | Retrieve/Update/Delete a room                    |
-| GET    | `/api/guests/`        | List/Create guests                               |
-| GET    | `/api/guests/{id}/`   | Retrieve/Update/Delete a guest                   |
-| GET    | `/api/bookings/`      | List/Create bookings (with date-conflict checks) |
-| GET    | `/api/bookings/{id}/` | Retrieve/Update/Delete a booking                 |
-| PATCH  | `/api/bookings/{id}/` | Partially update (e.g. cancel booking)           |
+## 🔧 API Endpoints
 
----
+The backend provides RESTful API endpoints:
 
-## 🎯 Features
+- `GET /api/hotels/` - List all hotels
+- `GET /api/hotels/{id}/` - Get hotel details
+- `GET /api/rooms/` - List all rooms
+- `POST /api/bookings/` - Create a new booking
+- `GET /api/bookings/` - List user bookings
+- `POST /api/guests/` - Register a new guest
+- `POST /api/auth/login/` - User authentication
 
-- **Full CRUD** for hotels, rooms, guests, bookings
-- **Date-overlap validation** prevents double-booking
-- **Cancel booking** via status update
-- **Dark theme** UI with gradients & glows
-- **Axios** for clean API calls
-- **Django Admin** for manual data management
+## 🎯 Usage
 
----
+1. **Browse Hotels**: View available hotels with their details and images
+2. **Search & Filter**: Use search functionality to find hotels by criteria
+3. **Room Selection**: Browse rooms within selected hotels
+4. **Guest Registration**: Create an account or login as existing user
+5. **Make Booking**: Select dates and book available rooms
+6. **View Bookings**: Check your booking history and details
 
-## 🧪 Sample Workflow
+## 🛠️ Development
 
-1. **Add Hotel & Rooms**
+### Database Management
+```bash
+# Clear database (custom management command)
+python manage.py clear_db
 
-   - Visit Django Admin: `http://127.0.0.1:8000/admin/`
-   - Create Hotel and Rooms.
+# Create new migrations
+python manage.py makemigrations
 
-2. **Add Guest**
+# Apply migrations
+python manage.py migrate
+```
 
-   - Frontend: fill “Add Guest” form → Success message.
+### Building for Production
+```bash
+# Build frontend for production
+cd frontend
+npm run build
+```
 
-3. **Book Room**
+## Developed for SEP program organized by Christ College of Engineering, Irinjalakuda.
 
-   - Frontend: fill “Book a Room” form → Success or “Room is already booked” error.
-
-4. **View & Cancel**
-
-   - Frontend: “All Bookings” list → click **Cancel Booking** to free up the room.
-
----
-
-### This project was made for the SEP Program for Christ College of Engineering, Irinjalakuda.
