@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import HotelViewSet, RoomViewSet, GuestViewSet, BookingViewSet
+from .views import HotelViewSet, RoomViewSet, GuestViewSet, BookingViewSet, verify_booking_password
 from .search import search_hotels
 
 router = DefaultRouter()
@@ -10,6 +10,7 @@ router.register(r'guests', GuestViewSet)
 router.register(r'bookings', BookingViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('auth/verify/', verify_booking_password, name='verify-booking-password'),
     path('hotels/search/', search_hotels, name='hotel-search'),
+    path('', include(router.urls)),
 ]

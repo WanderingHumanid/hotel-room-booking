@@ -1,13 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import api from '../api';
 
-function ViewBookings({ lookupMode }) {
+function ViewBookings({ lookupMode, user }) {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(false);
   const [cancelling, setCancelling] = useState(null);
-  const [lookup, setLookup] = useState({ first_name: '', last_name: '', phone: '' });
+  const [lookup, setLookup] = useState({ email: '', phone: '', password: '' });
   const [error, setError] = useState('');
   const [searched, setSearched] = useState(false);
+  const [verified, setVerified] = useState(false);
+
+  // If user is logged in, automatically fetch their bookings
+  useEffect(() => {
+    if (user && lookupMode) {
+      setVerified(true);
+      setLoading(true);
+      api.get(`bookings/?guest_email=${user.email}`)
+        .then(response => {
+          setBookings(response.data);
+          setSearched(true);
+        })
+        .catch(err => {
+          console.error('Error fetching user bookings:', err);
+          setError('Unable to fetch your bookings');
+        })
+        .finally(() => setLoading(false));
+    }
+  }, [user, lookupMode]);
 
   const handleCancel = (id) => {
     setCancelling(id);
@@ -26,6 +45,7 @@ function ViewBookings({ lookupMode }) {
   const handleLookupChange = (e) => {
     setLookup(prev => ({ ...prev, [e.target.name]: e.target.value }));
     setError('');
+    setVerified(false);
   };
 
   const handleLookup = async (e) => {
@@ -34,62 +54,109 @@ function ViewBookings({ lookupMode }) {
     setSearched(true);
     setLoading(true);
     setBookings([]);
-    // Search by phone or by first+last name
-    let params = {};
-    if (lookup.phone) {
-      params.phone = lookup.phone;
-    } else if (lookup.first_name && lookup.last_name) {
-      params.first_name = lookup.first_name;
-      params.last_name = lookup.last_name;
-    } else {
-      setError('Enter phone OR both first and last name.');
+    setVerified(false);
+    
+    // Validate inputs
+    if (!lookup.password) {
+      setError('Password is required.');
       setLoading(false);
       return;
     }
+    
+    if (!lookup.email && !lookup.phone) {
+      setError('Enter email OR phone number.');
+      setLoading(false);
+      return;
+    }
+    
     try {
-      const res = await api.get('bookings/', { params });
-      setBookings(res.data);
-      if (res.data.length === 0) setError('No bookings found for this user.');
+      // Use the new password verification endpoint
+      const verifyData = {
+        password: lookup.password
+      };
+      
+      if (lookup.email) {
+        verifyData.email = lookup.email;
+      } else if (lookup.phone) {
+        verifyData.phone = lookup.phone;
+      }
+      
+      const res = await api.post('auth/verify/', verifyData);
+      setBookings(res.data.bookings);
+      setVerified(true);
+      if (res.data.bookings.length === 0) setError('No bookings found for this user.');
     } catch (err) {
-      setError('Error fetching bookings.');
+      if (err.response?.status === 401) {
+        setError('Invalid password.');
+      } else if (err.response?.status === 404) {
+        setError('No user found with this email/phone.');
+      } else {
+        setError('Error verifying credentials or fetching bookings.');
+      }
     }
     setLoading(false);
   };
 
   if (lookupMode) {
     return (
-      <div style={{maxWidth: 420, margin: '0 auto', marginTop: 32}}>
-        <h2>Show Your Booking</h2>
-        <form className="modal-user-form" style={{marginBottom: 18}} onSubmit={handleLookup}>
-          <input
-            type="text"
-            name="first_name"
-            placeholder="First Name"
-            value={lookup.first_name}
-            onChange={handleLookupChange}
-          />
-          <input
-            type="text"
-            name="last_name"
-            placeholder="Last Name"
-            value={lookup.last_name}
-            onChange={handleLookupChange}
-          />
-          <div style={{textAlign: 'center', color: '#888', fontSize: '0.98rem', margin: '0 0 8px 0'}}>
-            <span style={{fontWeight: 600}}>OR</span>
-          </div>
-          <input
-            type="text"
-            name="phone"
-            placeholder="Phone Number"
-            value={lookup.phone}
-            onChange={handleLookupChange}
-          />
-          <button type="submit" style={{minWidth: 120, fontSize: '1.08rem', borderRadius: 8, fontWeight: 700}}>Show My Bookings</button>
+      <div style={{maxWidth: 520, margin: '0 auto', marginTop: 32}}>
+        {user ? (
+          <>
+            <h2 style={{textAlign: 'center', color: '#0073e6', marginBottom: '24px'}}>
+              Your Bookings
+            </h2>
+            <div style={{
+              background: '#f0f8ff',
+              padding: '16px 20px',
+              borderRadius: '12px',
+              border: '1.5px solid #c9e2ff',
+              marginBottom: '24px',
+              textAlign: 'center'
+            }}>
+              <p style={{margin: '0', fontSize: '1.05rem', color: '#0073e6', fontWeight: 600}}>
+                Welcome back, {user.first_name}! Here are your bookings:
+              </p>
+            </div>
+          </>
+        ) : (
+          <>
+            <h2>Show Your Booking</h2>
+            <form className="modal-user-form" style={{marginBottom: 18}} onSubmit={handleLookup}>
+              <input
+                type="email"
+                name="email"
+                placeholder="Email Address"
+                value={lookup.email}
+                onChange={handleLookupChange}
+              />
+              <div style={{textAlign: 'center', color: '#888', fontSize: '0.98rem', margin: '0 0 8px 0'}}>
+                <span style={{fontWeight: 600}}>OR</span>
+              </div>
+              <input
+                type="text"
+                name="phone"
+                placeholder="Phone Number"
+                value={lookup.phone}
+                onChange={handleLookupChange}
+              />
+              <input
+                type="password"
+                name="password"
+                placeholder="Your Password"
+                value={lookup.password}
+                onChange={handleLookupChange}
+                required
+              />
+              <button type="submit" style={{minWidth: 120, fontSize: '1.08rem', borderRadius: 8, fontWeight: 700}}>
+            {loading ? 'Verifying...' : 'Show My Bookings'}
+          </button>
         </form>
+        </>
+        )}
+        
         {error && <div style={{color: '#d32f2f', textAlign: 'center', fontWeight: 600, marginBottom: 12}}>{error}</div>}
         {loading && <div style={{textAlign: 'center'}}>Loading...</div>}
-        {bookings.length > 0 && (
+        {verified && bookings.length > 0 && (
           <div className="card-list" style={{marginTop: 24}}>
             {bookings.map(b => (
               <div className="card" key={b.id} style={{minWidth: 320, maxWidth: 420, alignItems: 'flex-start', position: 'relative', opacity: b.status === 'cancelled' ? 0.7 : 1}}>

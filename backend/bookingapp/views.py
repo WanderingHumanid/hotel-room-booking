@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.decorators import api_view
 
 
 # Create your views here.
@@ -37,8 +38,12 @@ class BookingViewSet(viewsets.ModelViewSet):
         phone = self.request.query_params.get('phone')
         first_name = self.request.query_params.get('first_name')
         last_name = self.request.query_params.get('last_name')
+        email = self.request.query_params.get('email')
+        
         if phone:
             queryset = queryset.filter(guest__phone=phone)
+        elif email:
+            queryset = queryset.filter(guest__email=email)
         elif first_name and last_name:
             queryset = queryset.filter(guest__first_name__iexact=first_name, guest__last_name__iexact=last_name)
         return queryset
@@ -73,3 +78,39 @@ class BookingViewSet(viewsets.ModelViewSet):
 
         # No conflict — proceed with normal creation
         return super().create(request, *args, **kwargs)
+
+@api_view(['POST'])
+def verify_booking_password(request):
+    """Verify password before showing bookings"""
+    email = request.data.get('email')
+    phone = request.data.get('phone')
+    password = request.data.get('password')
+    
+    if not password:
+        return Response({'error': 'Password is required'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    guest = None
+    if email:
+        try:
+            guest = Guest.objects.get(email=email)
+        except Guest.DoesNotExist:
+            return Response({'error': 'No user found with this email'}, status=status.HTTP_404_NOT_FOUND)
+    elif phone:
+        try:
+            guest = Guest.objects.get(phone=phone)
+        except Guest.DoesNotExist:
+            return Response({'error': 'No user found with this phone number'}, status=status.HTTP_404_NOT_FOUND)
+    else:
+        return Response({'error': 'Email or phone is required'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    if not guest.check_password(password):
+        return Response({'error': 'Invalid password'}, status=status.HTTP_401_UNAUTHORIZED)
+    
+    # Return guest info and their bookings
+    bookings = Booking.objects.filter(guest=guest)
+    booking_serializer = BookingSerializer(bookings, many=True)
+    
+    return Response({
+        'guest': GuestSerializer(guest).data,
+        'bookings': booking_serializer.data
+    }, status=status.HTTP_200_OK)

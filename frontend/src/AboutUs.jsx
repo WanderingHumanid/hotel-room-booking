@@ -5,26 +5,32 @@ export default function AboutUs() {
   return (
     <div className="aboutus-container">
       <div className="aboutus-hero">
-        <h1>About Us</h1>
-        <p className="aboutus-tagline">Your trusted partner for seamless hotel bookings and memorable stays.</p>
+        <h1>About LuxeStay</h1>
+        <p className="aboutus-tagline">Redefining luxury travel with seamless booking experiences and unforgettable stays.</p>
       </div>
       <div className="aboutus-content">
-        <h2>Who We Are</h2>
+        <h2>🏨 Who We Are</h2>
         <p>
-          <b>[Hotel_Booking]</b> is a modern hotel booking platform designed to make your travel experience effortless and enjoyable. Built with the latest web technologies, our mission is to connect travelers with the best hotels and rooms, offering a smooth, intuitive, and visually stunning interface.
+          <strong>LuxeStay</strong> is a premium hotel booking platform that bridges the gap between luxury and accessibility. We leverage cutting-edge technology to deliver personalized travel experiences, connecting discerning travelers with exceptional accommodations worldwide.
         </p>
-        <h2>Our Vision</h2>
+
+        <h2>✨ Our Mission</h2>
         <p>
-          We believe booking a room should be as relaxing as your stay. Our platform is crafted for speed, reliability, and ease of use, ensuring you find the perfect room at the best price, every time.
+          To transform how people discover and book their perfect stays. We believe every journey should begin with confidence and excitement, not frustration and uncertainty.
         </p>
-        <h2>Why Choose Us?</h2>
+
+        <h2>🌟 What Makes Us Different</h2>
         <ul>
-          <li>Beautiful, responsive, and user-friendly design</li>
-          <li>Real-time room availability and instant booking</li>
-          <li>Secure guest management and booking history</li>
-          <li>Modern tech stack: React, Django, MySQL</li>
-          <li>Dedicated to privacy, security, and transparency</li>
+          <li><strong>Intuitive Design:</strong> Beautiful, responsive interface that makes booking effortless</li>
+          <li><strong>Instant Booking:</strong> Real-time availability with immediate confirmation</li>
+          <li><strong>Secure & Private:</strong> Bank-level security protecting your personal information</li>
+          <li><strong>Modern Technology:</strong> Built with React, Django, and MySQL for peak performance</li>
         </ul>
+
+        <h2>🎯 Our Commitment</h2>
+        <p>
+          We're dedicated to providing transparent pricing, exceptional customer service, and a booking experience that exceeds expectations. Your perfect stay is just a few clicks away.
+        </p>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import api from '../api';
 
 export default function ExistingUserLookup({ onUserFound, onClose }) {
-  const [lookup, setLookup] = useState({ first_name: '', last_name: '', phone: '' });
+  const [lookup, setLookup] = useState({ email: '', phone: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [foundUser, setFoundUser] = useState(null);
@@ -18,42 +18,41 @@ export default function ExistingUserLookup({ onUserFound, onClose }) {
     setError('');
     setLoading(true);
     setFoundUser(null);
-    let params = {};
-    if (lookup.phone) {
-      params.phone = lookup.phone;
-    } else if (lookup.first_name && lookup.last_name) {
-      params.first_name = lookup.first_name;
-      params.last_name = lookup.last_name;
-    } else {
-      setError('Enter phone OR both first and last name.');
+    
+    if (!lookup.password) {
+      setError('Password is required.');
       setLoading(false);
       return;
     }
+    
+    if (!lookup.email && !lookup.phone) {
+      setError('Enter email OR phone number.');
+      setLoading(false);
+      return;
+    }
+    
     try {
-      const res = await api.get('guests/', { params });
-      if (res.data.length === 0) {
-        setError('No user found.');
-      } else if (res.data.length === 1) {
-        setFoundUser(res.data[0]);
+      // Use the password verification endpoint to find and verify user
+      const verifyData = {
+        password: lookup.password
+      };
+      
+      if (lookup.email) {
+        verifyData.email = lookup.email;
       } else if (lookup.phone) {
-        // If phone is provided but multiple users found, that's a data error, but pick the first
-        setFoundUser(res.data[0]);
-      } else if (lookup.first_name && lookup.last_name) {
-        // Try to match case-insensitive full name
-        const match = res.data.find(u =>
-          u.first_name.trim().toLowerCase() === lookup.first_name.trim().toLowerCase() &&
-          u.last_name.trim().toLowerCase() === lookup.last_name.trim().toLowerCase()
-        );
-        if (match) {
-          setFoundUser(match);
-        } else {
-          setError('No user found with that full name.');
-        }
-      } else {
-        setError('Multiple users found. Please use phone number for unique lookup.');
+        verifyData.phone = lookup.phone;
       }
+      
+      const res = await api.post('auth/verify/', verifyData);
+      setFoundUser(res.data.guest);
     } catch (err) {
-      setError('Error fetching user.');
+      if (err.response?.status === 401) {
+        setError('Invalid password.');
+      } else if (err.response?.status === 404) {
+        setError('No user found with this email/phone.');
+      } else {
+        setError('Error verifying user credentials.');
+      }
     }
     setLoading(false);
   };
@@ -65,17 +64,10 @@ export default function ExistingUserLookup({ onUserFound, onClose }) {
         <h2>Find Existing User</h2>
         <form className="modal-user-form" onSubmit={handleSubmit} style={{marginBottom: 10}}>
           <input
-            type="text"
-            name="first_name"
-            placeholder="First Name"
-            value={lookup.first_name}
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            name="last_name"
-            placeholder="Last Name"
-            value={lookup.last_name}
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            value={lookup.email}
             onChange={handleChange}
           />
           <div style={{textAlign: 'center', color: '#888', fontSize: '0.98rem', margin: '0 0 8px 0'}}>
@@ -88,14 +80,24 @@ export default function ExistingUserLookup({ onUserFound, onClose }) {
             value={lookup.phone}
             onChange={handleChange}
           />
-          <button type="submit" style={{minWidth: 120, fontSize: '1.08rem', borderRadius: 8, fontWeight: 700, marginTop: 8, padding: '14px 0'}}>Find User</button>
+          <input
+            type="password"
+            name="password"
+            placeholder="Your Password"
+            value={lookup.password}
+            onChange={handleChange}
+            required
+          />
+          <button type="submit" style={{minWidth: 120, fontSize: '1.08rem', borderRadius: 8, fontWeight: 700, marginTop: 8, padding: '14px 0'}}>
+            {loading ? 'Verifying...' : 'Find User'}
+          </button>
         </form>
         {error && <div style={{color: '#d32f2f', textAlign: 'center', fontWeight: 600, marginBottom: 12}}>{error}</div>}
         {loading && <div style={{textAlign: 'center'}}>Loading...</div>}
         {foundUser && (
           <div style={{marginTop: 18, textAlign: 'center'}}>
             <div style={{fontWeight: 700, color: '#0073e6', fontSize: '1.13rem', marginBottom: 8}}>
-              {foundUser.first_name} {foundUser.last_name} ({foundUser.phone})
+              ✅ {foundUser.first_name} {foundUser.last_name} ({foundUser.phone})
             </div>
             <button
               className="modal-book-btn"

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import api from '../api';
 
-export default function RoomSelect({ hotelId, guestId, onBook, onCancel }) {
+export default function RoomSelect({ hotelId, guestId, onBook, onCancel, preSelectedRoom }) {
   const [rooms, setRooms] = useState([]);
-  const [selectedRoom, setSelectedRoom] = useState('');
+  const [selectedRoom, setSelectedRoom] = useState(preSelectedRoom ? preSelectedRoom.id.toString() : '');
   const [status, setStatus] = useState('');
   const [loading, setLoading] = useState(true);
   const [checkIn, setCheckIn] = useState(() => {
@@ -65,42 +65,137 @@ export default function RoomSelect({ hotelId, guestId, onBook, onCancel }) {
   if (rooms.length === 0) return <div>No available rooms in this hotel.</div>;
 
   return (
-    <form className="modal-user-form" onSubmit={handleBook} style={{margin: 0, padding: 0}}>
-      <h2 style={{marginBottom: 0}}>Select a Room</h2>
-      <select value={selectedRoom} onChange={e => setSelectedRoom(e.target.value)} required style={{padding: '14px', fontSize: '1.13rem', borderRadius: 8, border: '1.5px solid #e0e7ff'}}>
-        <option value="">Choose a room...</option>
-        {rooms.map(room => (
-          <option key={room.id} value={room.id}>
-            Room {room.room_number} - {room.room_type} - ₹{room.price}
-          </option>
-        ))}
-      </select>
-      <div style={{display: 'flex', gap: 12, margin: '16px 0 0 0', width: '100%'}}>
+    <form className="modal-user-form" onSubmit={handleBook} style={{margin: 'auto', padding: '24px 20px'}}>
+      <h2 style={{
+        marginBottom: '20px', 
+        textAlign: 'center',
+        fontSize: '1.6rem',
+        color: '#0073e6',
+        fontWeight: 700
+      }}>
+        Select a Room
+      </h2>
+      
+      <div style={{marginBottom: '20px'}}>
+        <label style={{
+          display: 'block',
+          fontWeight: 600, 
+          color: '#0073e6', 
+          fontSize: '1.05rem',
+          marginBottom: '8px'
+        }}>
+          Choose Room
+        </label>
+        <select 
+          value={selectedRoom} 
+          onChange={e => setSelectedRoom(e.target.value)} 
+          required 
+          style={{
+            width: '100%',
+            padding: '16px 14px', 
+            fontSize: '1.1rem', 
+            borderRadius: 12, 
+            border: '1.5px solid #e0e7ff',
+            background: '#ffffff',
+            color: '#333'
+          }}
+        >
+          <option value="">Choose a room...</option>
+          {rooms.map(room => (
+            <option key={room.id} value={room.id}>
+              {room.room_number} - {room.room_type} - ₹{room.price}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div style={{
+        display: 'flex', 
+        gap: '16px', 
+        marginBottom: '24px', 
+        width: '100%'
+      }}>
         <div style={{flex: 1}}>
-          <label style={{fontWeight: 600, color: '#0073e6', fontSize: '1.01rem'}}>Check-in</label>
+          <label style={{
+            display: 'block',
+            fontWeight: 600, 
+            color: '#0073e6', 
+            fontSize: '1.05rem',
+            marginBottom: '8px'
+          }}>
+            Check-in
+          </label>
           <input
             type="date"
             value={checkIn}
             min={new Date().toISOString().slice(0, 10)}
             onChange={e => setCheckIn(e.target.value)}
             required
-            style={{width: '100%', padding: '12px', borderRadius: 8, border: '1.5px solid #e0e7ff', fontSize: '1.08rem', marginTop: 4}}
+            style={{
+              width: '100%', 
+              padding: '14px 12px', 
+              borderRadius: 12, 
+              border: '1.5px solid #e0e7ff', 
+              fontSize: '1.05rem',
+              background: '#ffffff',
+              color: '#333'
+            }}
           />
         </div>
         <div style={{flex: 1}}>
-          <label style={{fontWeight: 600, color: '#0073e6', fontSize: '1.01rem'}}>Check-out</label>
+          <label style={{
+            display: 'block',
+            fontWeight: 600, 
+            color: '#0073e6', 
+            fontSize: '1.05rem',
+            marginBottom: '8px'
+          }}>
+            Check-out
+          </label>
           <input
             type="date"
             value={checkOut}
             min={checkIn}
             onChange={e => setCheckOut(e.target.value)}
             required
-            style={{width: '100%', padding: '12px', borderRadius: 8, border: '1.5px solid #e0e7ff', fontSize: '1.08rem', marginTop: 4}}
+            style={{
+              width: '100%', 
+              padding: '14px 12px', 
+              borderRadius: 12, 
+              border: '1.5px solid #e0e7ff', 
+              fontSize: '1.05rem',
+              background: '#ffffff',
+              color: '#333'
+            }}
           />
         </div>
       </div>
-      <button type="submit" style={{marginTop: 18}}>Book Room</button>
-      {status && status !== 'success' && <p style={{color: '#d32f2f', margin: 0}}>{status}</p>}
+      
+      <button 
+        type="submit" 
+        style={{
+          width: '100%',
+          padding: '16px 20px',
+          fontSize: '1.15rem',
+          fontWeight: 700,
+          borderRadius: 12,
+          marginTop: '8px'
+        }}
+      >
+        Book Room
+      </button>
+      
+      {status && status !== 'success' && (
+        <p style={{
+          color: '#d32f2f', 
+          margin: '16px 0 0 0',
+          textAlign: 'center',
+          fontWeight: 600,
+          fontSize: '0.95rem'
+        }}>
+          {status}
+        </p>
+      )}
     </form>
   );
 }

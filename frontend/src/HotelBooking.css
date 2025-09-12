@@ -15,6 +15,117 @@ body.dark-mode {
   border: 1.5px solid #263043;
   backdrop-filter: blur(2px);
 }
+
+/* ===== Authentication Modal Styles ===== */
+.modal-user-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px 20px;
+  background: linear-gradient(120deg, #f8fbff 0%, #e0e7ff 100%);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,115,230,0.12);
+  border: 1.5px solid #e0e7ff;
+  margin-top: 8px;
+}
+
+.modal-user-form input {
+  padding: 14px 16px;
+  border: 1.5px solid #c9d1d9;
+  border-radius: 12px;
+  font-size: 1rem;
+  background: #ffffff;
+  color: #333;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.modal-user-form input:focus {
+  outline: none;
+  border-color: #0073e6;
+  box-shadow: 0 0 0 3px rgba(0, 115, 230, 0.15);
+}
+
+/* Responsive name fields */
+@media (max-width: 480px) {
+  .modal-user-form > div[style*="flex"] {
+    flex-direction: column !important;
+  }
+  
+  .modal-user-form > div[style*="flex"] input {
+    min-width: 100% !important;
+  }
+}
+
+/* Checkbox styling in modal forms */
+.modal-user-form input[type="checkbox"] {
+  width: auto !important;
+  height: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  min-width: auto !important;
+  flex: none !important;
+  box-sizing: content-box !important;
+}
+
+.modal-user-form label {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: auto !important;
+  flex: none !important;
+}
+
+.modal-user-form button[type="submit"] {
+  padding: 14px 24px;
+  background: linear-gradient(120deg, #0073e6 0%, #00a8e6 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 8px;
+}
+
+.modal-user-form button[type="submit"]:hover {
+  background: linear-gradient(120deg, #005bb5 0%, #0089c2 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 115, 230, 0.25);
+}
+
+.modal-user-form button[type="submit"]:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Dark mode auth form styles */
+.dark-mode .modal-user-form input {
+  background: #181c24 !important;
+  color: #e0e7ff !important;
+  border: 1.5px solid #263043 !important;
+}
+
+.dark-mode .modal-user-form input:focus {
+  border-color: #4fd1ff !important;
+  box-shadow: 0 0 0 3px rgba(79, 209, 255, 0.2) !important;
+}
+
+/* Enhanced Hotel Details Dark Mode */
+.dark-mode .modal-content h2 {
+  color: #4fd1ff !important;
+  background: linear-gradient(90deg, #4fd1ff 40%, #00e6a6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dark-mode .modal-content p {
+  color: #b6c2d1 !important;
+}
 .dark-mode .aboutus-content p,
 .dark-mode .aboutus-content ul,
 .dark-mode .aboutus-content li {
@@ -23,17 +134,49 @@ body.dark-mode {
 .dark-mode .aboutus-content h2,
 .dark-mode h2,
 .dark-mode .aboutus-hero h1 {
-  color: #fff !important;
-  background: linear-gradient(90deg, #4fd1ff 40%, #00e6a6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-fill-color: transparent;
-  text-shadow: 0 2px 16px #0e223a66;
-  border-left: 5px solid #00e6a6;
-  padding-left: 16px;
-  font-weight: 800;
-  letter-spacing: 0.01em;
+  color: #4fd1ff !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: unset !important;
+  background-clip: unset !important;
+  text-shadow: 0 2px 12px rgba(79, 209, 255, 0.3);
+  border: none !important;
+  padding: 0 !important;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.dark-mode .aboutus-content h2::after {
+  background: linear-gradient(90deg, #4fd1ff, #00e6a6) !important;
+}
+
+/* Dark mode About Us sections */
+.dark-mode .aboutus-section {
+  background: rgba(30, 34, 44, 0.8) !important;
+  border-color: #263043 !important;
+  box-shadow: 0 4px 20px rgba(79, 209, 255, 0.1) !important;
+}
+
+.dark-mode .feature-card {
+  background: rgba(24, 28, 36, 0.9) !important;
+  border-color: #263043 !important;
+}
+
+.dark-mode .feature-card:hover {
+  border-color: #4fd1ff !important;
+  box-shadow: 0 6px 24px rgba(79, 209, 255, 0.2) !important;
+}
+
+.dark-mode .feature-card h3 {
+  color: #4fd1ff !important;
+}
+
+.dark-mode .feature-card p {
+  color: #b6c2d1 !important;
+}
+
+.dark-mode h2::after {
+  background: linear-gradient(90deg, #4fd1ff, #00e6a6) !important;
 }
 .dark-mode .aboutus-content a {
   color: #4fd1ff !important;
@@ -184,7 +327,7 @@ body.dark-mode {
 .aboutus-container {
   max-width: 980px;
   margin: 0 auto 64px auto;
-  background: linear-gradient(120deg, #f8fbff 0%, #e0e7ff 100%);
+  background: #ffffff;
   border-radius: 28px;
   box-shadow: 0 10px 48px rgba(0,115,230,0.13), 0 2px 16px rgba(0,0,0,0.10);
   padding: 64px 48px 48px 48px;
@@ -221,7 +364,6 @@ body.dark-mode {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-fill-color: transparent;
   text-align: center;
 }
 .aboutus-tagline {
@@ -240,16 +382,88 @@ body.dark-mode {
 }
 .aboutus-content h2 {
   color: #0073e6;
-  font-size: 1.45rem;
-  font-weight: 800;
-  margin-top: 44px;
-  margin-bottom: 16px;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-top: 48px;
+  margin-bottom: 20px;
+  letter-spacing: 0.02em;
+  text-align: center;
+  position: relative;
+  padding: 0;
+  border: none;
+  background: none;
+  box-shadow: none;
+}
+
+.aboutus-content h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #0073e6, #00c6fb);
+  margin: 12px auto 0;
+  border-radius: 2px;
+}
+
+/* Modern About Us Sections */
+.aboutus-section {
+  margin-bottom: 48px;
+  padding: 32px 28px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 16px;
+  border: 1.5px solid rgba(224, 231, 255, 0.8);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 115, 230, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.aboutus-section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 115, 230, 0.12);
+}
+
+/* Features Grid */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  margin-top: 28px;
+}
+
+.feature-card {
+  background: linear-gradient(120deg, #f8fbff 0%, #f0f7ff 100%);
+  padding: 24px 20px;
+  border-radius: 12px;
+  text-align: center;
+  border: 1.5px solid #e0e7ff;
+  transition: all 0.2s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 24px rgba(0, 115, 230, 0.15);
+  border-color: #b3d9ff;
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+  line-height: 1;
+}
+
+.feature-card h3 {
+  color: #0073e6;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 8px 0;
   letter-spacing: 0.01em;
-  background: linear-gradient(90deg, #e0e7ff 60%, #b3e0ff 100%);
-  border-left: 5px solid #00c6fb;
-  padding-left: 16px;
-  border-radius: 0 12px 12px 0;
-  box-shadow: 0 1px 8px rgba(0,115,230,0.04);
+}
+
+.feature-card p {
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
 }
 .aboutus-content p, .aboutus-content ul {
   font-size: 1.13rem;
@@ -493,7 +707,7 @@ header {
   box-shadow: 0 6px 36px rgba(0, 115, 230, 0.13), 0 2px 10px rgba(0,0,0,0.08);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-bottom: 54px;
   position: sticky;
   top: 0;
@@ -643,13 +857,24 @@ h2 {
   margin: 48px 0 24px;
   font-size: 1.7rem;
   color: #0073e6;
-  font-weight: 800;
-  letter-spacing: 0.01em;
-  border-left: 5px solid #00c6fb;
-  padding-left: 16px;
-  background: linear-gradient(90deg, #e0e7ff 60%, #f5faff 100%);
-  border-radius: 0 12px 12px 0;
-  box-shadow: 0 1px 8px rgba(0,115,230,0.04);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-align: center;
+  position: relative;
+  padding: 0;
+  border: none;
+  background: none;
+  box-shadow: none;
+}
+
+h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #0073e6, #00c6fb);
+  margin: 12px auto 0;
+  border-radius: 2px;
 }
 
 /* ===== Card Container (Hotels, Rooms, Bookings) ===== */

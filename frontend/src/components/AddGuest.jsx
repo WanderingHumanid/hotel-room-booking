@@ -9,6 +9,7 @@ function AddGuest({ hotelId, modalMode, onBookingSuccess, onUserAdded, setError 
     last_name: '',
     email: '',
     phone: '',
+    password: '',
   });
   const [status, setStatus] = useState('');
   const [booking, setBooking] = useState(null);
@@ -27,12 +28,21 @@ function AddGuest({ hotelId, modalMode, onBookingSuccess, onUserAdded, setError 
     setStatus('');
     setBooking(null);
     if (setError) setError('');
+    
+    // Validate password length
+    if (formData.password.length < 6) {
+      const msg = 'Password must be at least 6 characters long.';
+      setStatus(msg);
+      if (setError) setError(msg);
+      return;
+    }
+    
     try {
       // 1. Add guest
       const guestRes = await api.post('guests/', formData);
       const guestId = guestRes.data.id;
       setStatus('User added successfully!');
-      setFormData({ first_name: '', last_name: '', email: '', phone: '' });
+      setFormData({ first_name: '', last_name: '', email: '', phone: '', password: '' });
       if (onUserAdded) onUserAdded(guestId);
     } catch (err) {
       let msg = 'Error adding user.';
@@ -143,6 +153,15 @@ function AddGuest({ hotelId, modalMode, onBookingSuccess, onUserAdded, setError 
             value={formData.phone}
             onChange={handleChange}
             required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Set Password (min 6 chars)"
+            value={formData.password}
+            onChange={handleChange}
+            required
+            minLength={6}
           />
           <button
             type="submit"
