@@ -169,11 +169,12 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "https://hotel-room-booking-teal.vercel.app",
 ]
 
 # Add Vercel domain when deploying
 frontend_url = config('FRONTEND_URL', default='')
-if frontend_url:
+if frontend_url and frontend_url not in CORS_ALLOWED_ORIGINS:
     CORS_ALLOWED_ORIGINS.append(frontend_url)
 
 CORS_ALLOWED_HEADERS = [
