@@ -78,7 +78,7 @@ export default function HotelModal({ hotel, onClose, user }) {
                   marginBottom: '20px'
                 }}>
                   <img
-                    src={hotel.image ? hotel.image : process.env.PUBLIC_URL + `/hotel-${hotel.id}.jpg`}
+                    src={hotel.image_url || process.env.PUBLIC_URL + `/hotel-${hotel.id}.jpg`}
                     alt={hotel.name}
                     className="hotel-img"
                     style={{ 
@@ -223,7 +223,7 @@ export default function HotelModal({ hotel, onClose, user }) {
                         }}
                       >
                         <img
-                          src={room.image ? room.image : process.env.PUBLIC_URL + `/room-${room.id}.jpg`}
+                          src={room.image_url || process.env.PUBLIC_URL + `/room-${room.id}.jpg`}
                           alt={room.room_type}
                           style={{
                             width: '100%',
