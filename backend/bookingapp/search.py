@@ -8,15 +8,26 @@ from datetime import datetime
 @api_view(['GET'])
 def search_hotels(request):
     location = request.GET.get('location', '')
+    hotel_name = request.GET.get('name', '')
     check_in = request.GET.get('check_in')
     check_out = request.GET.get('check_out')
 
+    # Start with all hotels
+    hotels = Hotel.objects.all()
+    
+    # Apply search filters
     if location:
+        hotels = hotels.filter(address__icontains=location)
+    
+    if hotel_name:
+        hotels = hotels.filter(name__icontains=hotel_name)
+    
+    # If both location and name are provided, search in both fields
+    if location and hotel_name:
         hotels = Hotel.objects.filter(
-            Q(name__icontains=location) | Q(address__icontains=location)
+            Q(name__icontains=hotel_name) | Q(address__icontains=location) |
+            Q(name__icontains=location) | Q(address__icontains=hotel_name)
         )
-    else:
-        hotels = Hotel.objects.all()
 
     # If dates are provided, filter hotels with at least one available room in that range
     if check_in and check_out:
@@ -42,5 +53,5 @@ def search_hotels(request):
                     break  # At least one room available in this hotel
         hotels = hotels.filter(id__in=available_hotel_ids)
 
-    serializer = HotelSerializer(hotels, many=True)
+    serializer = HotelSerializer(hotels, many=True, context={'request': request})
     return Response(serializer.data)

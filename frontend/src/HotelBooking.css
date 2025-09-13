@@ -16,6 +16,231 @@ body.dark-mode {
   backdrop-filter: blur(2px);
 }
 
+.dark-mode .search-sidebar {
+  background: rgba(30,34,44,0.98) !important;
+  color: #e0e7ff !important;
+  box-shadow: 0 8px 40px rgba(0, 115, 230, 0.22), 0 2px 16px rgba(0,0,0,0.32);
+  border: 1.5px solid #263043;
+  backdrop-filter: blur(2px);
+}
+
+.dark-mode .search-sidebar h3 {
+  color: #e0e7ff !important;
+}
+
+.dark-mode .search-input {
+  background: rgba(40,44,54,0.9) !important;
+  color: #e0e7ff !important;
+  border-color: #4a5568 !important;
+}
+
+.dark-mode .search-input:focus {
+  border-color: #0073e6 !important;
+  box-shadow: 0 0 0 3px rgba(0, 115, 230, 0.25) !important;
+}
+
+.dark-mode .search-info {
+  background: rgba(40, 80, 40, 0.8) !important;
+  color: #a7f3d0 !important;
+}
+
+.dark-mode .no-results {
+  background: rgba(80, 60, 40, 0.8) !important;
+  color: #fbbf24 !important;
+}
+
+/* ===== Hotel Search Styles - Sidebar Layout ===== */
+.hotel-section-container {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 24px;
+  align-items: start;
+}
+
+.hotels-content {
+  min-width: 0; /* Prevents grid items from overflowing */
+}
+
+.search-sidebar {
+  background: linear-gradient(120deg, #f8fbff 0%, #e0e7ff 100%);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0,115,230,0.12);
+  border: 1.5px solid #e0e7ff;
+  position: sticky;
+  top: 20px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.search-row {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.search-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.search-field label {
+  font-weight: 600;
+  color: #4a5568;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.search-input {
+  padding: 12px 16px;
+  border: 1.5px solid #c9d1d9;
+  border-radius: 12px;
+  font-size: 1rem;
+  background: #ffffff;
+  color: #333;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #0073e6;
+  box-shadow: 0 0 0 3px rgba(0, 115, 230, 0.15);
+}
+
+.search-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.search-btn, .clear-btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.search-btn {
+  background: linear-gradient(135deg, #0073e6 0%, #0056b3 100%);
+  color: white;
+}
+
+.search-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #0056b3 0%, #004494 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 115, 230, 0.3);
+}
+
+.search-btn:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}
+
+.clear-btn {
+  background: #f8f9fa;
+  color: #6c757d;
+  border: 1px solid #dee2e6;
+}
+
+.clear-btn:hover {
+  background: #e9ecef;
+  color: #495057;
+}
+
+.search-info {
+  text-align: center;
+  margin: 16px 0 24px 0;
+  padding: 12px;
+  background: #e8f5e8;
+  border-radius: 8px;
+  color: #2d5a2d;
+  font-weight: 500;
+}
+
+.no-results {
+  text-align: center;
+  margin: 32px 0;
+  padding: 24px;
+  background: #fff3cd;
+  border-radius: 12px;
+  color: #856404;
+  grid-column: 1 / -1;
+}
+
+/* Mobile responsiveness for search sidebar */
+@media (max-width: 1024px) {
+  .hotel-section-container {
+    grid-template-columns: 1fr 280px;
+    gap: 16px;
+  }
+  
+  .search-sidebar {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hotel-section-container {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .search-sidebar {
+    position: static;
+    max-height: none;
+    margin-bottom: 16px;
+    order: -1; /* Move search above hotels on mobile */
+  }
+  
+  .search-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  
+  .search-buttons {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-sidebar {
+    padding: 12px;
+  }
+  
+  .search-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .search-buttons {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .search-btn, .clear-btn {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+}
+
 /* ===== Authentication Modal Styles ===== */
 .modal-user-form {
   display: flex;

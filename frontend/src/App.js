@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import HotelList from './components/HotelList';
+import HotelSection from './components/HotelSection';
 // import RoomList from './components/RoomList';
 // import AddGuest from './components/AddGuest';
 import ViewBookings from './components/ViewBookings';
@@ -154,9 +154,8 @@ function App() {
               Discover exceptional hotels with comfortable rooms, premium amenities, and unbeatable prices. 
               Click on any hotel to explore available rooms and make your reservation.
             </p>
-            <div className="card-list">
-              <HotelList user={user} />
-            </div>
+            
+            <HotelSection user={user} />
           </section>
         </>
       )}

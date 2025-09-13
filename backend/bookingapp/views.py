@@ -12,6 +12,18 @@ from .serializers import HotelSerializer, RoomSerializer, GuestSerializer, Booki
 class HotelViewSet(viewsets.ModelViewSet):
     queryset = Hotel.objects.all()
     serializer_class = HotelSerializer
+    
+    def get_queryset(self):
+        queryset = Hotel.objects.all()
+        name = self.request.query_params.get('name')
+        location = self.request.query_params.get('location')
+        
+        if name:
+            queryset = queryset.filter(name__icontains=name)
+        if location:
+            queryset = queryset.filter(address__icontains=location)
+            
+        return queryset
 
 class RoomViewSet(viewsets.ModelViewSet):
     queryset = Room.objects.all()

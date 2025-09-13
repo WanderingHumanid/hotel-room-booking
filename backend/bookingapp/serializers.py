@@ -4,10 +4,18 @@ from .models import Hotel, Room, Guest, Booking
 class HotelSerializer(serializers.ModelSerializer):
     available_rooms_count = serializers.ReadOnlyField()
     lowest_price = serializers.ReadOnlyField()
+    image_url = serializers.SerializerMethodField()
     
     class Meta:
         model = Hotel
         fields = '__all__'
+        
+    def get_image_url(self, obj):
+        if obj.image:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.image.url)
+        return None
 
 
 class RoomSerializer(serializers.ModelSerializer):
