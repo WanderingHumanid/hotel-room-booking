@@ -2,12 +2,28 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
+from django.contrib.auth.models import User
+from django.http import JsonResponse
+import os
 
 
 # Create your views here.
 from rest_framework import viewsets
 from .models import Hotel, Room, Guest, Booking
 from .serializers import HotelSerializer, RoomSerializer, GuestSerializer, BookingSerializer
+
+@api_view(['POST'])
+def create_admin(request):
+    """Create admin user for demo purposes"""
+    username = 'admin'
+    email = 'admin@demo.com'
+    password = 'admin123'
+    
+    if User.objects.filter(username=username).exists():
+        return JsonResponse({'message': f'Admin user already exists! Username: {username}, Password: {password}'})
+    
+    User.objects.create_superuser(username=username, email=email, password=password)
+    return JsonResponse({'message': f'Admin user created successfully! Username: {username}, Password: {password}'})
 
 class HotelViewSet(viewsets.ModelViewSet):
     queryset = Hotel.objects.all()
