@@ -12,7 +12,7 @@ from rest_framework import viewsets
 from .models import Hotel, Room, Guest, Booking
 from .serializers import HotelSerializer, RoomSerializer, GuestSerializer, BookingSerializer
 
-@api_view(['POST'])
+@api_view(['GET', 'POST'])
 def create_admin(request):
     """Create admin user for demo purposes"""
     username = 'admin'
