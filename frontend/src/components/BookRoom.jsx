@@ -9,6 +9,7 @@ function BookRoom() {
     room_id: '',
     check_in: '',
     check_out: '',
+    guest_count: 1,
     status: 'confirmed'
   });
 
@@ -32,7 +33,7 @@ function BookRoom() {
   api.post('bookings/', formData)
     .then(() => {
       setStatusMsg('Booking created successfully!');
-      setFormData({ guest_id: '', room_id: '', check_in: '', check_out: '', status: 'confirmed' });
+      setFormData({ guest_id: '', room_id: '', check_in: '', check_out: '', guest_count: 1, status: 'confirmed' });
     })
     .catch((err) => {
       const msg = err.response?.data?.error || 'Error creating booking.';
@@ -65,6 +66,15 @@ function BookRoom() {
 
         <input type="date" name="check_in" value={formData.check_in} onChange={handleChange} required />
         <input type="date" name="check_out" value={formData.check_out} onChange={handleChange} required />
+
+        <select name="guest_count" value={formData.guest_count} onChange={handleChange} required>
+          <option value="">Number of Guests</option>
+          {[1, 2, 3, 4, 5, 6].map(num => (
+            <option key={num} value={num}>
+              {num} Guest{num > 1 ? 's' : ''}
+            </option>
+          ))}
+        </select>
 
         <button type="submit">Book Room</button>
       </form>

@@ -6,6 +6,7 @@ export default function RoomSelect({ hotelId, guestId, onBook, onCancel, preSele
   const [selectedRoom, setSelectedRoom] = useState(preSelectedRoom ? preSelectedRoom.id.toString() : '');
   const [status, setStatus] = useState('');
   const [loading, setLoading] = useState(true);
+  const [guestCount, setGuestCount] = useState(1);
   const [checkIn, setCheckIn] = useState(() => {
     const today = new Date();
     return today.toISOString().slice(0, 10);
@@ -46,6 +47,7 @@ export default function RoomSelect({ hotelId, guestId, onBook, onCancel, preSele
         room_id: selectedRoom,
         check_in: checkIn,
         check_out: checkOut,
+        guest_count: guestCount,
         status: 'confirmed',
       });
       setStatus('success');
@@ -104,6 +106,38 @@ export default function RoomSelect({ hotelId, guestId, onBook, onCancel, preSele
           {rooms.map(room => (
             <option key={room.id} value={room.id}>
               {room.room_number} - {room.room_type} - ₹{room.price}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div style={{marginBottom: '20px'}}>
+        <label style={{
+          display: 'block',
+          fontWeight: 600, 
+          color: '#0073e6', 
+          fontSize: '1.05rem',
+          marginBottom: '8px'
+        }}>
+          Number of Guests
+        </label>
+        <select 
+          value={guestCount} 
+          onChange={e => setGuestCount(parseInt(e.target.value))} 
+          required 
+          style={{
+            width: '100%',
+            padding: '16px 14px', 
+            fontSize: '1.1rem', 
+            borderRadius: 12, 
+            border: '1.5px solid #e0e7ff',
+            background: '#ffffff',
+            color: '#333'
+          }}
+        >
+          {[1, 2, 3, 4, 5, 6].map(num => (
+            <option key={num} value={num}>
+              {num} Guest{num > 1 ? 's' : ''}
             </option>
           ))}
         </select>

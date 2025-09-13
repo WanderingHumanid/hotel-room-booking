@@ -58,5 +58,5 @@ class BookingSerializer(serializers.ModelSerializer):
         model = Booking
         fields = [
             'id', 'guest', 'guest_id', 'room', 'room_id',
-            'check_in', 'check_out', 'status'
+            'check_in', 'check_out', 'guest_count', 'total_price', 'status'
         ]

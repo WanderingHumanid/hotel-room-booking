@@ -63,12 +63,22 @@ class Booking(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     check_in = models.DateField()
     check_out = models.DateField()
+    guest_count = models.PositiveIntegerField(default=1)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     status = models.CharField(max_length=20, choices=[
         ('confirmed', 'Confirmed'),
         ('cancelled', 'Cancelled'),
         ('checked_in', 'Checked In'),
         ('checked_out', 'Checked Out'),
     ], default='confirmed')
+
+    def save(self, *args, **kwargs):
+        # Calculate total price if not provided
+        if self.total_price is None and self.room:
+            # Calculate number of nights
+            nights = (self.check_out - self.check_in).days
+            self.total_price = self.room.price * nights * self.guest_count
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"Booking: {self.guest} - {self.room}"
