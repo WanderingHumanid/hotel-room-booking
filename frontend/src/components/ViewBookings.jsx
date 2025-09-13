@@ -7,7 +7,6 @@ function ViewBookings({ lookupMode, user }) {
   const [cancelling, setCancelling] = useState(null);
   const [lookup, setLookup] = useState({ email: '', phone: '', password: '' });
   const [error, setError] = useState('');
-  const [searched, setSearched] = useState(false);
   const [verified, setVerified] = useState(false);
 
   // If user is logged in, automatically fetch their bookings
@@ -18,7 +17,6 @@ function ViewBookings({ lookupMode, user }) {
       api.get(`bookings/?guest_email=${user.email}`)
         .then(response => {
           setBookings(response.data);
-          setSearched(true);
         })
         .catch(err => {
           console.error('Error fetching user bookings:', err);
@@ -51,7 +49,6 @@ function ViewBookings({ lookupMode, user }) {
   const handleLookup = async (e) => {
     e.preventDefault();
     setError('');
-    setSearched(true);
     setLoading(true);
     setBookings([]);
     setVerified(false);
