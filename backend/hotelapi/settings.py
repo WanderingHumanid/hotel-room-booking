@@ -94,24 +94,10 @@ WSGI_APPLICATION = 'hotelapi.wsgi.application'
 # Database configuration
 if 'DATABASE_URL' in os.environ:
     # Production database (PostgreSQL on Render)
-    try:
-        import dj_database_url
-        DATABASES = {
-            'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
-        }
-    except ImportError:
-        # Fallback parsing if dj_database_url is not available
-        DATABASE_URL = os.environ.get('DATABASE_URL')
-        DATABASES = {
-            'default': {
-                'ENGINE': 'django.db.backends.postgresql',
-                'NAME': DATABASE_URL.split('/')[-1],
-                'USER': DATABASE_URL.split('://')[1].split(':')[0],
-                'PASSWORD': DATABASE_URL.split('://')[1].split(':')[1].split('@')[0],
-                'HOST': DATABASE_URL.split('@')[1].split(':')[0],
-                'PORT': DATABASE_URL.split('@')[1].split(':')[1].split('/')[0],
-            }
-        }
+    import dj_database_url
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+    }
 else:
     # Development database (MySQL)
     DATABASES = {
