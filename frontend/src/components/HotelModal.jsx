@@ -78,7 +78,7 @@ export default function HotelModal({ hotel, onClose, user }) {
                   marginBottom: '20px'
                 }}>
                   <img
-                    src={hotel.image_url || process.env.PUBLIC_URL + `/hotel-${hotel.id}.jpg`}
+                    src={`${process.env.PUBLIC_URL}/${hotel.image_url}`}
                     alt={hotel.name}
                     className="hotel-img"
                     style={{ 
@@ -91,7 +91,7 @@ export default function HotelModal({ hotel, onClose, user }) {
                     }}
                     onError={(e) => {
                       e.target.onerror = null;
-                      e.target.src = process.env.PUBLIC_URL + '/hotel-placeholder.jpg';
+                      e.target.src = `${process.env.PUBLIC_URL}/hotel-placeholder.jpg`;
                     }}
                   />
                 </div>
@@ -223,7 +223,7 @@ export default function HotelModal({ hotel, onClose, user }) {
                         }}
                       >
                         <img
-                          src={room.image_url || process.env.PUBLIC_URL + `/room-${room.id}.jpg`}
+                          src={`${process.env.PUBLIC_URL}/${room.image_url}`}
                           alt={room.room_type}
                           style={{
                             width: '100%',
@@ -235,7 +235,7 @@ export default function HotelModal({ hotel, onClose, user }) {
                           }}
                           onError={(e) => {
                             e.target.onerror = null;
-                            e.target.src = process.env.PUBLIC_URL + '/room-placeholder.jpg';
+                            e.target.src = `${process.env.PUBLIC_URL}/room-placeholder.jpg`;
                           }}
                         />
                         <h4 style={{margin: '0 0 6px 0', fontSize: '1.1rem', fontWeight: 700, color: '#0073e6'}}>

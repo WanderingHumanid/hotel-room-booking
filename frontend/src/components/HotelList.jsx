@@ -60,10 +60,10 @@ function HotelList({ user }) {
         </div>
       ) : (
         displayedHotels?.map(hotel => {
-          const imgSrc = hotel.image_url || process.env.PUBLIC_URL + `/hotel-${hotel.id}.jpg`;
+          const imgSrc = `${process.env.PUBLIC_URL}/${hotel.image_url}`;
           const handleImgError = (e) => {
             e.target.onerror = null;
-            e.target.src = process.env.PUBLIC_URL + '/hotel-placeholder.jpg';
+            e.target.src = `${process.env.PUBLIC_URL}/hotel-placeholder.jpg`;
           };
           return (
             <div
