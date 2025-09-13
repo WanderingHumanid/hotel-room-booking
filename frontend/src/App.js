@@ -9,12 +9,12 @@ import AboutUs from './AboutUs';
 import './HotelBooking.css';
 
 function App() {
-  const [showBookings, setShowBookings] = useState(false);
+  // const [showBookings, setShowBookings] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
   const [showBookingLookup, setShowBookingLookup] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [user, setUser] = useState(null);
-  const [darkMode, setDarkMode] = useState(() => {
+  const [darkMode] = useState(() => {
     return localStorage.getItem('darkMode') === 'true';
   });
 

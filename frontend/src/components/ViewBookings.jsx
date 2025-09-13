@@ -7,7 +7,7 @@ function ViewBookings({ lookupMode, user }) {
   const [cancelling, setCancelling] = useState(null);
   const [lookup, setLookup] = useState({ email: '', phone: '', password: '' });
   const [error, setError] = useState('');
-  const [searched, setSearched] = useState(false);
+  // const [searched, setSearched] = useState(false);
   const [verified, setVerified] = useState(false);
 
   // If user is logged in, automatically fetch their bookings
