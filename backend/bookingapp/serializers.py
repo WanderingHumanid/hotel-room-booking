@@ -11,8 +11,9 @@ class HotelSerializer(serializers.ModelSerializer):
         fields = '__all__'
         
     def get_image_url(self, obj):
-        # Return static image filename - frontend will handle the full path
-        return f"hotel-{obj.id}.jpg"
+        # Cycle through available images (1-6) instead of showing placeholders
+        image_num = ((obj.id - 1) % 6) + 1
+        return f"hotel-{image_num}.jpg"
 
 
 class RoomSerializer(serializers.ModelSerializer):
@@ -24,8 +25,9 @@ class RoomSerializer(serializers.ModelSerializer):
         fields = '__all__'
         
     def get_image_url(self, obj):
-        # Return static image filename - frontend will handle the full path
-        return f"room-{obj.id}.jpg"
+        # Cycle through available images (1-4) instead of showing placeholders
+        image_num = ((obj.id - 1) % 4) + 1
+        return f"room-{image_num}.jpg"
 
 
 class GuestSerializer(serializers.ModelSerializer):
